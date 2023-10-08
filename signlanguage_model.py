@@ -110,4 +110,23 @@ def plot_k_accuracy(X,y):
 	plt.plot(range(1,max_k),scores, color="r")
 	plt.title("Model accuracy with different K-values")
 	plt.xlabel("K-value")
-	plt.ylabel("
+	plt.ylabel("Accuracy")
+	plt.xticks(range(1,max_k))
+	plt.yticks(np.arange( round(min(scores),2), round(max(scores),2), 0.01 ))	# set y-axis ticks to be from the smallest acc to biggest with 0.01 increments
+	plt.grid(True, linestyle="-", linewidth=0.5, color="gray", alpha=0.7)		# Add a customized grid to the background
+
+	plt.show()
+
+
+N = 70
+K = 10
+if __name__ == "__main__":
+	X,y = load_data()
+	pca = pca_init(X, N)
+	X_reduced = pca.transform(X)
+
+	clf = train_model(X_reduced,y, K)[0]
+
+	#plot_pca_accuracy(X)
+	#generate_confusion_matrix(X_reduced,y)
+	#plot_k_accuracy(X_reduced,y)
